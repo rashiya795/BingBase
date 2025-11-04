@@ -8,25 +8,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Media {
-  id          Int      @id @default(autoincrement())
-  title       String
-  type        String
-  director    String
-  budget      Float
-  location    String
-  duration    String
-  year        Int
-  description String
-  posterUrl   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  userId      Int     
-  user        User    @relation(fields: [userId], references: [id])
-
+  id           Int           @id @default(autoincrement())
+  title        String
+  type         String
+  director     String
+  budget       Float
+  location     String
+  duration     String
+  year         Int
+  description  String
+  posterUrl    String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  userId       Int
+  user         User          @relation(fields: [userId], references: [id])
   weekendPicks WeekendPick[]
+
+  @@index([userId], map: "Media_userId_fkey")
 }
 
 model User {
@@ -40,10 +39,14 @@ model User {
 }
 
 model WeekendPick {
-  id       Int      @id @default(autoincrement())
-  user     User     @relation(fields: [userId], references: [id])
-  userId   Int
-  media    Media    @relation(fields: [mediaId], references: [id])
-  mediaId  Int
+  
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  mediaId   Int
   createdAt DateTime @default(now())
+  media     Media    @relation(fields: [mediaId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([mediaId], map: "WeekendPick_mediaId_fkey")
+  @@index([userId], map: "WeekendPick_userId_fkey")
 }
