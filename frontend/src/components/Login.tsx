@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Alertbox from "../components/Alertbox";
+import { BASE_URL } from "../config";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function Login() {
   e.preventDefault();
 
   try {
-    const res = await axios.post("http://localhost:3000/api/auth/login", formData);
+const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
 
     // Save token + username correctly
     localStorage.setItem("token", res.data.token);
