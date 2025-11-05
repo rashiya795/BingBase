@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { BASE_URL } from "../config";
 type Media = {
   id: number;
   title: string;
@@ -16,7 +16,7 @@ export default function Weekendpicks() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get("http://localhost:3000/api/weekend", {
+const res = await axios.get(`${BASE_URL}/api/weekend`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

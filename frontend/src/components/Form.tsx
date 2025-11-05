@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Alertbox from "./Alertbox";
 import { useLocation ,useNavigate} from "react-router-dom";
+import { BASE_URL } from "../config.ts";
 
 interface MediaFormData {
   title: string;
@@ -58,10 +59,10 @@ async function handleSubmit(e: React.FormEvent) {
     const token = localStorage.getItem("token"); // Get token
 
     if (state?.id) {
-      // 👉 EDIT MODE
-      await axios.put(
-        `http://localhost:3000/api/media/${state.id}`,
-        formData,
+    
+    await axios.put(
+  `${BASE_URL}/api/media/${state.id}`,
+  formData,
         {
           headers: { Authorization: `Bearer ${token}` } // Send token
         }
@@ -74,10 +75,10 @@ async function handleSubmit(e: React.FormEvent) {
       setTimeout(() => navigate("/browse"), 2000);
 
     } else {
-      // 👉 ADD MODE
-      await axios.post(
-        "http://localhost:3000/api/media",
-        formData,
+     
+     await axios.post(
+  `${BASE_URL}/api/media`,
+  formData,
         {
           headers: { Authorization: `Bearer ${token}` } // Send token
         }

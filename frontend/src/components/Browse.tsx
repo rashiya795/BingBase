@@ -6,6 +6,7 @@ import Alertbox from "./Alertbox";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import { BASE_URL } from "../config.ts";
 
 
 type Media = {
@@ -56,7 +57,7 @@ const fetchPage = async (p: number) => {
 
     const token = localStorage.getItem("token"); 
 
-    const res = await axios.get("http://localhost:3000/api/media", {
+    const res = await axios.get("/api/media", {
       params: { page: p, limit },
       headers: {                           
         Authorization: `Bearer ${token}`
@@ -82,28 +83,6 @@ const fetchPage = async (p: number) => {
 };
 
 
-//   // Delete handler
-// async function handleDelete(id: number) {
-//   const confirmDelete = window.confirm("Are you sure you want to delete?");
-//   if (!confirmDelete) return;
-
-//   try {
-//     await axios.delete(`http://localhost:3000/api/media/${id}`);
-
-//     setMedia(prev => prev.filter(m => m.id !== id));
-
-//     setAlertMessage("Deleted Successfully ✅");
-//     setAlertOpen(true);
-//   } catch (error) {
-//     setAlertMessage("Delete Failed ❌");
-//     setAlertOpen(true);
-//   }
-// }
-
-// const handleEdit = (m: Media) => {
-//   console.log("Edit clicked:", m);
-// }
-
 const handleEdit = (media: Media) => {
   navigate(`/add`, { state: media });
 };
@@ -121,7 +100,7 @@ async function confirmDelete() {
   
         const token = localStorage.getItem("token");
 
-    await axios.delete(`http://localhost:3000/api/media/${deleteId}`,{
+await axios.delete(`${BASE_URL}/api/media/${deleteId}`, {
             headers: { Authorization: `Bearer ${token}` }
 
     });
@@ -178,17 +157,17 @@ const addToWeekendPicks = async (mediaId: number) => {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await axios.post(
-      "http://localhost:3000/api/weekend/toggle",
+   const res = await axios.post(
+  `${BASE_URL}/api/weekend/toggle`,
       { mediaId },
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    // ✅ Toggle UI state
+   
     setPicked((prev) =>
       prev.includes(mediaId)
-        ? prev.filter((id) => id !== mediaId) // remove if already picked
-        : [...prev, mediaId] // add if not picked
+        ? prev.filter((id) => id !== mediaId) 
+        : [...prev, mediaId] 
     );
 
     setAlertMessage(res.data.message);
@@ -205,7 +184,7 @@ useEffect(() => {
   const fetchPicked = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/api/weekend", {
+const res = await axios.get(`${BASE_URL}/api/weekend`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
