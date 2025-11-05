@@ -57,7 +57,8 @@ const fetchPage = async (p: number) => {
 
     const token = localStorage.getItem("token"); 
 
-    const res = await axios.get("/api/media", {
+   const res = await axios.get(`${BASE_URL}/api/media`, {
+
       params: { page: p, limit },
       headers: {                           
         Authorization: `Bearer ${token}`

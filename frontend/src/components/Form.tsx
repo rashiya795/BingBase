@@ -57,6 +57,7 @@ async function handleSubmit(e: React.FormEvent) {
 
   try {
     const token = localStorage.getItem("token"); // Get token
+console.log(token);
 
     if (state?.id) {
     
