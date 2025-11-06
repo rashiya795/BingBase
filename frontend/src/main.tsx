@@ -22,7 +22,7 @@ let routers = createBrowserRouter([
   errorElement:<Error/>,
   children:[
     {
-path:"",
+index:true,
 element:<Home/>
     },
     {
@@ -48,7 +48,7 @@ element:<Browse/>
     },
 
     {
-      path:'Signup',
+      path:'signup',
       element:<Signup/>
     },
 
