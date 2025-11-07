@@ -15,7 +15,8 @@ function handleLogout() {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
   // window.location.reload(); 
-   navigate("/login"); 
+      setTimeout(() => navigate("/login"), 900);
+
 }
 
 
