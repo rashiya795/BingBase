@@ -4,7 +4,6 @@ This project has both frontend and backend.
 
 ##  Folder Structure
 project/
-├── frontend/ # React UI
 └── backend/ # Node.js + Prisma + MySQL API
 
 
@@ -15,10 +14,7 @@ npm install
 npx prisma generate
 npm start or npm run dev
 
-##  How to Run Frontend
-cd frontend
-npm install
-npm run dev
+
 
 
 ##  Environment Variables
