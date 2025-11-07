@@ -1,11 +1,12 @@
 import { useState,useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUsername] = useState("");
 const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
 
 
@@ -13,7 +14,8 @@ const [showMenu, setShowMenu] = useState(false);
 function handleLogout() {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
-  window.location.reload(); 
+  // window.location.reload(); 
+   navigate("/login"); 
 }
 
 
